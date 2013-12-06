@@ -1,0 +1,4 @@
+alias la="ls -a"
+alias h="history"
+alias G="smbclient -W EAPAC -A /home/etagjin/.authentication //ECNGZNTINF2/cgcgroup"
+alias vi="vim"

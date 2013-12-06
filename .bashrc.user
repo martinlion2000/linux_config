@@ -1,0 +1,20 @@
+test -s ~/.alias && . ~/.alias || true
+
+export PS1="\[\e[0;33m\]\u@\h:\w>\[\e[m\e[0;32m\]\$(git branch 2> /dev/null | sed -n 's/^* \(.*\)/(\1)/p')\[\e[m\] "
+
+export LD_LIBRARY_PATH=/app/chrome/12.0.742.124/LMWP3:$LD_LIBRARY_PATH
+
+export EDITOR=vim
+
+eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+
+eval `perl /proj/MSP/common/etc/mspenv $$`
+
+export PATH=/home/etagjin/local/bin:/home/etagjin/script:/app/vim/7.4.005/LMWP3/bin:$PATH:/app/chrome/12.0.742.124/LMWP3
+
+function pydict {
+    currentDir=`pwd`
+    cd ~/.vim/bundle/pydiction
+    python pydiction.py $@
+    cd $currentDir
+}

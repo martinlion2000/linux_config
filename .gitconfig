@@ -1,0 +1,13 @@
+[user]
+	name = Martin Tang
+	email = martin.tang@ericsson.com
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	review = "!f() { br=`git branch | sed -n 's/^* \\(.*\\)/\\1/p'`; git push origin HEAD:refs/for/$br;}; f"
+[color]
+	ui = true
+[merge]
+	conflictstyle = diff3

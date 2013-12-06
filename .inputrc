@@ -1,0 +1,10 @@
+set editing-mode vi
+
+set bell-style none
+
+"\C-l": clear-screen
+"\C-n": next-history
+"\C-p": previous-history
+"\C-e": vi-movement-mode
+"\C-x\C-r": re-read-init-file
+

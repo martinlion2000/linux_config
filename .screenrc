@@ -1,0 +1,78 @@
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+##    Explanation of hardstatus line    ##
+
+# Ignore the ' marks if you use these examples for yourself
+
+# Note that if you want to use the color brown under konsole
+# You actually use bright yellow (%{Y}).
+
+# Note the embeded space after the colon, I feel
+#  it just looks nicer with a blank between the
+#  text and console edge:
+#   '%{=b}%{G} Screen(s): '
+
+# This prints the window listing in blue:
+#   '%{b}%w'
+
+# This right-aligns what follows:
+#   '%='
+
+# This displays the time (hours and minutes) in 12hr format
+# and adds an AM/PM flag, in bold green:
+#   '%{G}%C%A'
+
+# This displays the day of the week:
+#   '%D'
+
+#This displays the date in Mon/day/year format:
+# and again I embeded a space to give me one space
+# between the text and console edge:
+#  '%M/%d/%Y '
+
+# Green text, time, and date; windows in blue:
+#hardstatus alwayslastline "%{=b}%{b}%-w%{.BW}%10>%n*%t%{-}%+w%< %=%{kG}%C%A %D, %Y-%m-%d"
+#hardstatus alwayslastline "%{gk}[ %{G}%H %{g}][%=%{.kW}%-w%{r}[%n %t]%{-}%+w%=%{g}]%{C} %{gk}[%Y-%m-%d %c:%s%D]"
+hardstatus alwayslastline "%{gk}[ %{G}%H %{g}][%=%{.kW}%-w%{r}[%n %t]%{-}%+w%=%{g}]%{C} %{gk}[%Y-%m-%d%D]"
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+##    Some general options    ##
+
+# Turn off start message:
+startup_message off   # default: on
+
+altscreen on
+autodetach on
+defscrollback 20000
+
+# Automatically detach on hangup, or the screen will keep eating your memory after the terminal emulator has been terminated.
+autodetach off      # default: on
+
+# Set messages timeout to one second:
+msgwait 1
+
+# Add the scrollbar mechanism
+#termcapinfo xterm* ti@:te@
+
+#use bash as default shell.
+shell bash
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+##    Keybindings    ##
+
+# bind F1  to select 1
+# bind F7  to detach screen session from this terminal
+# bind F8  to kill current screen window.
+# bind F9  to create a new screen
+# bind F10 to rename current screen window
+# bind F11 to move to previous window
+# bind F12 to move to next window
+#bindkey -k k1 select 1
+#bindkey -k k7 detach
+#bindkey -k k8 kill
+#bindkey -k k9 screen
+#bindkey -k k; title
+#bindkey -k F1 prev
+#bindkey -k F2 next
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+bind R eval "source $HOME/.screenrc" "echo '.screenrc reloaded!'"
+bind > eval "writebuf" "exec sh -c 'xsel -nbi </tmp/screen-exchange'"
+bind y eval "exec sh -c 'xsel -bo >/tmp/screen-exchange'"
