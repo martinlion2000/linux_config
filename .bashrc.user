@@ -1,5 +1,8 @@
 test -s ~/.alias && . ~/.alias || true
 
+source ~/.git-completion.sh
+source ~/.commonCmd.sh
+
 export PS1="\[\e[0;33m\]\u@\h:\w>\[\e[m\e[0;32m\]\$(git branch 2> /dev/null | sed -n 's/^* \(.*\)/(\1)/p')\[\e[m\] "
 
 export LD_LIBRARY_PATH=/app/chrome/12.0.742.124/LMWP3:$LD_LIBRARY_PATH
