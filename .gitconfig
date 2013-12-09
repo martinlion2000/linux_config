@@ -6,6 +6,9 @@
 	ci = commit
 	co = checkout
 	br = branch
+	unstage = "reset HEAD --"
+	last = "log -1 HEAD"
+	visual = "!gitk"
 	review = "!f() { br=`git branch | sed -n 's/^* \\(.*\\)/\\1/p'`; git push origin HEAD:refs/for/$br;}; f"
 [color]
 	ui = true
