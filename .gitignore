@@ -1,0 +1,14 @@
+*
+!/.ssh/config
+!.gitignore
+!.alias
+!.bashrc.user
+!.commonCmd.sh
+!.git-completion.sh
+!.gitconfig
+!.inputrc
+!.perltidyrc
+!.profile
+!.screenrc
+!.tmux.conf
+!.vimrc

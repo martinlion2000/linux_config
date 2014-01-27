@@ -2,7 +2,7 @@ LPDEST=ECNSHPR201
 export LPDEST
 test -r $HOME/../login/profile && . $HOME/../login/profile
 
-. .bashrc.user
+. ~/.bashrc.user
 
 # TMUX
 #if which tmux >/dev/null 2>&1; then
