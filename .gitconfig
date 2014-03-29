@@ -14,3 +14,5 @@
 	ui = true
 [merge]
 	conflictstyle = diff3
+[core]
+        pager = more

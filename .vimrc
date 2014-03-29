@@ -201,6 +201,7 @@ Bundle 'genutils'
 Bundle 'lookupfile'
 Bundle 'YankRing.vim'
 Bundle 'Mark'
+Bundle 'Conque-Shell'
 Bundle 'mru.vim'
 Bundle 'grep.vim'
 Bundle 'a.vim'
@@ -306,6 +307,11 @@ function! HasPaste()
     endif
 endfunction
 
+if has('win32') || has('win95') || has('win64')
+  nmap <leader>tv :ConqueTermSplit cmd <CR>
+else
+  nmap <leader>tv :ConqueTermSplit bash <CR>
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Abbrevs

@@ -3,8 +3,6 @@ test -s ~/.alias && . ~/.alias || true
 source ~/.git-completion.sh
 source ~/.commonCmd.sh
 
-export PS1="\[\e[0;33m\]\u@\h:\w>\[\e[m\e[0;32m\]\$(git branch 2> /dev/null | sed -n 's/^* \(.*\)/(\1)/p')\[\e[m\] "
-
 export LD_LIBRARY_PATH=/app/chrome/12.0.742.124/LMWP3:$LD_LIBRARY_PATH
 
 export EDITOR=vim
@@ -15,9 +13,14 @@ eval `perl /proj/MSP/common/etc/mspenv $$`
 
 export PATH=/home/etagjin/local/bin:/home/etagjin/script:/app/vim/7.4.005/LMWP3/bin:$PATH:/app/chrome/12.0.742.124/LMWP3
 
+#export PS1="\[\e[0;33m\]\u@\h:\w>\[\e[m\e[0;32m\]\$(git branch 2> /dev/null | sed -n 's/^* \(.*\)/(\1)/p')\[\e[m\] "
+#export PS1="\[\e[0;33m\][\u@\h \w]\[\e[0;32m\]\$(git branch 2> /dev/null)\n\[\e[0m\]\$(if [ \$? = 0 ]; then echo \\$; else echo \[\e[31m\]\\$\[\e[31m\]; fi) \[\e[0m\]"
+export PS1="\$(if [ \$? = 0 ]; then echo \[\e[0\;32m\]; else echo \[\e[0\;31m\]; fi)[\u@\h \w]\[\e[0;33m\]\$(git branch 2> /dev/null | sed -n 's/^* \(.*\)/(\1)/p')\[\e[0m\]\n\$ "
+
 function pydict {
     currentDir=`pwd`
     cd ~/.vim/bundle/pydiction
     python pydiction.py $@
     cd $currentDir
 }
+
