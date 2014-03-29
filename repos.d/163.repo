@@ -1,0 +1,8 @@
+[163]
+name=163-13.1-Non-Oss
+enabled=1
+autorefresh=1
+baseurl=http://mirrors.163.com/openSUSE/distribution/13.1/repo/non-oss
+path=/
+type=yast2
+keeppackages=0

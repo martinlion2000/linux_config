@@ -1,0 +1,8 @@
+[openSUSE-13.1-1.10]
+name=openSUSE-13.1-DVD-x86_64.iso
+enabled=1
+autorefresh=1
+baseurl=hd:///?device=/dev/disk/by-id/wwn-0x5000cca582ccaa33-part7&filesystem=ntfs
+path=/
+type=plaindir
+keeppackages=0
