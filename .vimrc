@@ -15,8 +15,8 @@
 " Get out of VI's compatible mode
 set nocompatible
 
-" Basic configuration
-if has("win32")
+" ========================== Basic configuration ==============
+if has("win32") || has("win64")
   " Set _viminfo in the $VIM folder
   set viminfo='100,<50,s10,h,rA:,rB:,n$VIM\\_viminfo
   set guifont=courier_new:h12
@@ -30,6 +30,7 @@ set autoread
 set completeopt=longest,menu  " Enable the omni-completion
 set ruler  "Always show current position
 set cmdheight=2  "The commandbar height
+set diffopt=filler,context:3
 set hid  "Change buffer - without saving
 set backspace=eol,start,indent  " Set backspace config
 set whichwrap+=<,>,h,l
@@ -95,7 +96,7 @@ if has("multi_byte")
   set ambiwidth=double
 endif
 
-
+" ========================== map configuration ===============
 " With a map leader it's possible to do extra key combinations
 let mapleader = ","
 let g:mapleader = ","
@@ -157,7 +158,7 @@ map <leader>cc :botright cope<cr>
 map <leader>p :cp<cr>
 
 " Fast editing of the .vimrc
-if has("win32")
+if has("win32") || has("win64")
     map <leader>e :e! $VIM/_vimrc<cr>
     autocmd! bufwritepost _vimrc source $VIM/_vimrc
 else
@@ -170,10 +171,11 @@ runtime! ftplugin/man.vim
 
 syntax enable  "Enable syntax hl
 
+" ========================== For property ====================
 " Vundle configuration
 filetype off      " required!
 
-if has("win32")
+if has("win32") || has("win64")
     set runtimepath+=$VIM/vimfiles/bundle/vundle/
     call vundle#rc('$VIM/vimfiles/bundle')
 else
@@ -228,7 +230,7 @@ filetype plugin indent on
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
 
-
+" ========================== For Programming =================
 "auto sv and ld session
 let g:AutoSessionFile="project.vim"
 let g:OrigPWD=getcwd()
@@ -242,9 +244,7 @@ function! LoadSession()
     exec "rviminfo ".g:AutoSessionFile."info"
 endfunction
 
-""""""""""""""""""""""""""""""
 " => Visual mode related
-""""""""""""""""""""""""""""""
 " Really useful!
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
@@ -272,10 +272,7 @@ function! VisualSearch(direction) range
     let @" = l:saved_reg
 endfunction
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Command mode related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
    let l:currentBufNum = bufnr("%")
@@ -296,9 +293,7 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-""""""""""""""""""""""""""""""
 " => Statusline
-""""""""""""""""""""""""""""""
 function! HasPaste()
     if &paste
         return 'PASTE MODE  '
@@ -313,9 +308,7 @@ else
   nmap <leader>tv :ConqueTermSplit bash <CR>
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Abbrevs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 
 "Delete trailing white space, useful for Python ;)
@@ -326,18 +319,12 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 
-
-""""""""""""""""""""""""""""""
 " => bufExplorer plugin
-""""""""""""""""""""""""""""""
 let g:bufExplorerDefaultHelp=0
 let g:bufExplorerShowRelativePath=1
 map <leader>o :BufExplorer<cr>
 
-
-""""""""""""""""""""""""""""""
 " => Minibuffer plugin
-""""""""""""""""""""""""""""""
 let g:miniBufExplModSelTarget = 1
 let g:miniBufExplorerMoreThanOne = 2
 let g:miniBufExplModSelTarget = 0
@@ -353,17 +340,11 @@ autocmd BufRead,BufNew :call UMiniBufExplorer
 
 map <leader>u :TMiniBufExplorer<cr>
 
-
-""""""""""""""""""""""""""""""
 " => Taglist plugin
-""""""""""""""""""""""""""""""
 let g:Tlist_Show_One_File=1
 let g:Tlist_Exit_OnlyWindow=1
 
-
-""""""""""""""""""""""""""""""
 " => NERDTree plugin
-""""""""""""""""""""""""""""""
 let g:NERDTree_title='[NERD Tree]'
 
 function! NERDTree_Start()
@@ -374,47 +355,32 @@ function! NERDTree_IsValid()
     return 1
 endfunction
 
-""""""""""""""""""""""""""""""
 " => Winmanager plugin
-""""""""""""""""""""""""""""""
 let g:winManagerWindowLayout='NERDTree|TagList'
 let g:winManagerWidth=40
 "nnoremap <leader>wm :WMToggle<cr> 
 nmap <silent> <leader>wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
 
-
-""""""""""""""""""""""""""""""
 " => A plugin
-""""""""""""""""""""""""""""""
 nnoremap <silent><F12> :A<cr>
 
-""""""""""""""""""""""""""""""
 " => Grep plugin
-""""""""""""""""""""""""""""""
 nnoremap <silent><F3> :Grep<cr>
 
-""""""""""""""""""""""""""""""
 " => Supertab plugin
-""""""""""""""""""""""""""""""
 "let g:SuperTabRetainCompletionType=2
 "let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
-
-""""""""""""""""""""""""""""""
 " => YankRing plugin
-""""""""""""""""""""""""""""""
 nnoremap <silent><F11> :YRShow<cr>
-if has("win32")
+if has("win32") || has("win64")
     let g:yankring_history_dir = '$VIM'
 endif
 let g:yankring_min_element_length = 2
 let g:yankring_window_height = 5
 let g:yankring_manage_numbered_reg = 1
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Omni complete functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -423,10 +389,7 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
-
-""""""""""""""""""""""""""""""
 " => Python section
-""""""""""""""""""""""""""""""
 let python_highlight_all = 1
 au FileType python syn keyword pythonDecorator True None False self
 au FileType python call PythonFold()
@@ -447,9 +410,7 @@ function! PythonFold()
     setl foldmethod=indent
 endfunction
 
-""""""""""""""""""""""""""""""
 " => JavaScript section
-"""""""""""""""""""""""""""""""
 au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
 au FileType javascript setl nocindent
@@ -471,12 +432,9 @@ function! JavaScriptFold()
     setl foldtext=FoldText()
 endfunction
 
-
-""""""""""""""""""""""""""""""
 " => MRU plugin
-""""""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
-if has("win32")
+if has("win32") || has("win64")
     let MRU_File=$VIM.'\_vim_mru_files'
     let MRU_Exclude_Files = '^c:\\temp\\.*'
 else
@@ -484,18 +442,12 @@ else
 endif
 map <leader>f :MRU<CR>
 
-
-""""""""""""""""""""""""""""""
 " => Command-T
-""""""""""""""""""""""""""""""
 let g:CommandTMaxHeight = 15
 noremap <leader>j :CommandT<cr>
 noremap <leader>y :CommandTFlush<cr>
 
-
-""""""""""""""""""""""""""""""
 " => Vim grep
-""""""""""""""""""""""""""""""
 let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
 if has("win32")
 "  set grepprg=findstr /S
@@ -503,17 +455,11 @@ else
   set grepprg=/bin/grep\ -nH
 endif
 
-
-""""""""""""""""""""""""""""""
 " => pydiction
-""""""""""""""""""""""""""""""
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 20
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MISC
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 "noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 

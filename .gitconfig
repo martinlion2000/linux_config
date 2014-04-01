@@ -1,18 +1,56 @@
 [user]
-	name = Martin Tang
-	email = martin.tang@ericsson.com
-[alias]
-	st = status
-	ci = commit
-	co = checkout
-	br = branch
-	unstage = "reset HEAD --"
-	last = "log -1 HEAD"
-	visual = "!gitk"
-	review = "!f() { br=`git branch | sed -n 's/^* \\(.*\\)/\\1/p'`; git push origin HEAD:refs/for/$br;}; f"
+    name = Martin Tang
+    email = martin.tang@ericsson.com
+[push]
+    default = matching
+[diff]
+    rename = copy
+# Inspired from tpope: https://github.com/tpope/tpope/blob/master/.gitconfig
+[diff "ruby"]
+    funcname = \"^ */(/(def/) .*/)\"
+[diff "image"]
+    textconv = identify
 [color]
-	ui = true
+    ui = true
+    log = always
+    status = always
+    add = always
+    push = always
+    pull = always
+    diff = always
+    branch = always
+    interactive = auto
+[color "branch"]
+    current = green bold
+    local = yellow
+    remote = red
+[color "status"]
+    added = yellow
+    changed = red bold
+    untracked = magenta normal dim
+[color "diff"]
+    meta = blue bold
+    frag = magenta
+    old = red bold
+    new = green bold
+    whitespace = red reverse
 [merge]
-	conflictstyle = diff3
+    conflictstyle = diff3
 [core]
-        pager = more
+    editor = vim
+    pager = more
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+[alias]
+    st = status
+    pl = pull
+    ci = commit -m
+    co = checkout
+    br = branch
+    cl = clean -dfx
+    sb = show-branch
+    cb = rev-parse --abbrev-ref HEAD
+    wc = whatchanged
+    unstage = reset HEAD --
+    last = cat-file commit HEAD
+    visual = "!gitk"
+    review = "!f() { br=`git branch | sed -n 's/^* \\(.*\\)/\\1/p'`; git push origin HEAD:refs/for/$br;}; f"
