@@ -1,0 +1,8 @@
+[163-update]
+name=163-13.1-Update
+enabled=1
+autorefresh=1
+baseurl=http://mirrors.163.com/openSUSE/update/13.1
+path=/
+type=rpm-md
+keeppackages=0
